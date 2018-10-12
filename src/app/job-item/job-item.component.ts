@@ -26,7 +26,7 @@ export class JobItemComponent implements OnInit {
 	}
 
 	onSave() {
-		this.httpClient.put(this.baseUrl + '/jobitem' + this.jobItem.id, {
+		this.httpClient.put(this.baseUrl + '/jobitem/' + this.jobItem.id, {
 			'name': this.jobItem.name,
 			'jobListId': this.jobItem.jobListId,
 			'createdAt': this.jobItem.createdAt,
@@ -37,7 +37,7 @@ export class JobItemComponent implements OnInit {
 	}
 
 	onDestroy() {
-		this.httpClient.delete(this.baseUrl + '/jobitem' + this.jobItem.id).subscribe(() => {
+		this.httpClient.delete(this.baseUrl + '/jobitem/' + this.jobItem.id).subscribe(() => {
 			this.destroy.emit(this.jobItem);
 		});
 	}
