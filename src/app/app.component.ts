@@ -10,13 +10,13 @@ import {environment} from '../environments/environment';
 	styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-	baseUrl;
+	baseUrl = environment.baseUrl;
 
   jobList: JobList = new JobList(null, '');
 	jobLists: JobList[] = [];
 
 	constructor(private httpClient: HttpClient) {
-    this.baseUrl = environment.baseUrl;
+   // this.baseUrl = environment.baseUrl;
 	}
 
 	ngOnInit() {
