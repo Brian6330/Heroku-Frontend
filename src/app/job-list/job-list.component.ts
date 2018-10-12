@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {JobList} from '../job-list';
 import {JobItem} from '../job-item';
 import {HttpClient, HttpParams} from '@angular/common/http';
+import {environment} from '../../environments/environment';
 
 @Component({
 	selector: 'app-job-list',
