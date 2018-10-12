@@ -9,6 +9,8 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 	styleUrls: ['./job-list.component.css']
 })
 export class JobListComponent implements OnInit {
+	
+	baseUrl;
 
 	@Input()
 	jobList: JobList;
@@ -18,6 +20,7 @@ export class JobListComponent implements OnInit {
 	destroy = new EventEmitter<JobList>();
 
 	constructor(private httpClient: HttpClient) {
+		this.baseUrl = environment.baseUrl;
 
 	}
 
