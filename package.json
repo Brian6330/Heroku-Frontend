@@ -8,9 +8,8 @@
     "build": "ng build",
     "test": "jest",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "test:watch": "jest --watch",
-    "publishheroku": "cd .. && git subtree push --prefix frontend ese2018-team8-frontend  master || true"
+    "e2e": "ng e2e"
+    
   },
   "private": true,
   "dependencies": {

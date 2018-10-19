@@ -34,13 +34,13 @@ export class JobListComponent implements OnInit {
 	}
 
 	onSave() {
-		this.httpClient.put(this.baseUrl + '/joblist/' + this.jobList.id, {
+		this.httpClient.put(this.baseUrl + '/joblist' + this.jobList.id, {
 			'name': this.jobList.name
 		}).subscribe();
 	}
 
 	onDestroy() {
-		this.httpClient.delete(this.baseUrl + '/joblist/' + this.jobList.id).subscribe(() => {
+		this.httpClient.delete(this.baseUrl + '/joblist' + this.jobList.id).subscribe(() => {
 			this.destroy.emit(this.jobList);
 		});
 	}
