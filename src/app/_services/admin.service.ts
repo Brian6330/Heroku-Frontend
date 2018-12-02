@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
 import {AlertService} from './alert.service';
-import {HttpClient} from '@angular/common/http';
-import {User} from '../_models';
+import {HttpClient, HttpResponse} from '@angular/common/http';
+import {Job, User} from '../_models';
 import {UserService} from './user.service';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 export class AdminService {
@@ -12,33 +13,36 @@ export class AdminService {
     private adminsUrl: string = 'http://localhost:3000/admins/';
     private jobsUrl: string = 'http://localhost:3000/jobs/';
 
+
+    private isAdminSubject: BehaviorSubject<string>;
+    public isAdmin: Observable<string>;
+
     constructor(
         private alert: AlertService,
         private userService: UserService,
         private http: HttpClient
     ) {
+        this.isAdminSubject = new BehaviorSubject<string>(localStorage.getItem('isA'));
+        this.isAdmin = this.isAdminSubject.asObservable();
     }
 
-    isAdmin() {
-        this.auth().subscribe(
-            () => {
-                return true;
-            },
-            err => {
-                return false;
-            }
-        );
+    public get isAdminValue(): string {
+        return this.isAdminSubject.value;
     }
 
-    auth() {
-        return this.http.get(this.adminsUrl + `auth/`);
+    auth(): Observable<HttpResponse<Object>> {
+        return this.http.get(this.adminsUrl + `auth/`, {observe: 'response'});
+    }
+
+    getAllUnapprovedJobs() {
+        return this.http.get<Job[]>(this.jobsUrl + 'unapproved');
     }
 
     getAllUsers() {
         return this.http.get<User[]>(this.usersUrl);
     }
 
-    getAllUnapproved() {
+    getAllUnapprovedUsers() {
         return this.http.get<User[]>(this.usersUrl + 'unapproved');
     }
 
