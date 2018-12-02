@@ -1,42 +1,31 @@
-import {Component, OnInit} from '@angular/core';
-import {JobList} from './job-list';
-import {JobItem} from './job-item';
-import {HttpClient} from '@angular/common/http';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
+
+import {UserService} from './_services';
 import {environment} from '../environments/environment';
 
 @Component({
-	selector: 'app-root',
-	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
-	baseUrl = environment.baseUrl;
+export class AppComponent {
 
-  jobList: JobList = new JobList(null, '');
-	jobLists: JobList[] = [];
+    currentUser: string;
+    title = 'Job For You';
+    shortTitle = 'J4Y';
+    baseUrl = environment.baseUrl;
 
-	constructor(private httpClient: HttpClient) {
-   // this.baseUrl = environment.baseUrl;
-	}
+    constructor(
+        private router: Router,
+        private userService: UserService
+    ) {
+        this.userService.currentUser.subscribe(x => this.currentUser = x);
+        // this.baseUrl = environment.baseUrl;
+    }
 
-	ngOnInit() {
-		this.httpClient.get(this.baseUrl + '/joblist').subscribe((instances: any) => {
-			this.jobLists = instances.map((instance) => new JobList(instance.id, instance.name));
-		});
-	}
-
-	onJobListCreate() {
-		this.httpClient.post(this.baseUrl + '/joblist', {
-			'name': this.jobList.name
-		}).subscribe((instance: any) => {
-			this.jobList.id = instance.id;
-			this.jobLists.push(this.jobList);
-			this.jobList = new JobList(null, '');
-		});
-	}
-
-	onJobListDestroy(jobList: JobList) {
-		this.jobLists.splice(this.jobLists.indexOf(jobList), 1);
-	}
-
+    logout() {
+        this.userService.logout();
+        this.router.navigate(['/home']);
+    }
 }

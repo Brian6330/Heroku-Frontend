@@ -1,27 +1,39 @@
-<mat-form-field>
-	<input matInput placeholder="New Company" [(ngModel)]="jobList.name" name="name">
-</mat-form-field>
-<button mat-button (click)="onJobListCreate()">create</button>
-<app-job-list [jobList]="jobList" (destroy)="onJobListDestroy($event)"
-              *ngFor="let jobList of jobLists"></app-job-list>
-			  
-<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+<!-- navigation bar -->
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+    <div class="nav-item"><h2>{{shortTitle}}</h2></div>
+    <div class="navbar-nav">
+        <a class="nav-item nav-link" routerLink="/home">Home</a>
+        <a class="nav-item nav-link" routerLink="/jobs">Job Overview</a>
+        <a *ngIf="currentUser" class="nav-item nav-link" routerLink="/job-creator">Job Creator</a>
+        <a *ngIf="currentUser" class="nav-item nav-link" routerLink="/my-jobs-panel">My Jobs</a>
+        <a *ngIf="currentUser" class="nav-item nav-link" routerLink="/admin-panel">Admin-Panel</a>
+        <a *ngIf="!currentUser" class="nav-item nav-link" routerLink="/login">Login</a>
+        <a *ngIf="!currentUser" class="nav-item nav-link" routerLink="/register">Register</a>
+        <a (click)="logout()" *ngIf="currentUser" class="nav-item nav-link">Logout</a>
+    </div>
+</nav>
 
-	<script>
-	// When the user scrolls down 10px from the top of the document, show the button
-	window.onscroll = function() {scrollFunction()};
+<!-- main app container -->
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 offset-sm-3">
+                <alert></alert>
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <google-ad></google-ad> -->
 
-	function scrollFunction() {
-		if (document.body.scrollTop > 10 || document.documentElement.scrollTop > 10) {
-			document.getElementById("myBtn").style.display = "block";
-		} else {
-			document.getElementById("myBtn").style.display = "none";
-		}
-	}
-
-	// When the user clicks on the button, scroll to the top of the document
-	function topFunction() {
-		document.body.scrollTop = 0; // For Safari
-		document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-	}
-	</script>
+<!-- footer-->
+<div class="footer" id="footer">
+    <div class="container">
+        <div class="about">
+            <a routerLink="/about">About us</a>
+        </div>
+        <div class="copyright">
+            &copy; Job-For-You: <a href="https://job-for-you.com/">job-for-you.com</a>
+        </div>
+    </div>
+</div>
