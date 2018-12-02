@@ -22,6 +22,7 @@ import {JobsPanelComponent} from './admin-panel/jobs-panel/jobs-panel.component'
 import {UserDetailComponent} from './admin-panel/users-panel/user-detail';
 import {UserEditComponent} from './admin-panel/users-panel/user-edit';
 import {JobDetailComponent} from './job-overview/job-detail';
+import {JobComponent} from './job'
 import { JobCreatorComponent } from './job-overview/job-creator/job-creator.component';
 import { UsersUnapprovedComponent } from './admin-panel/users-panel/users-unapproved/users-unapproved.component';
 import { MyJobsPanelComponent } from './job-overview/my-jobs-panel/my-jobs-panel.component';
@@ -34,6 +35,7 @@ import { MyJobsPanelComponent } from './job-overview/my-jobs-panel/my-jobs-panel
         AppComponent,
         AlertComponent,
         HomeComponent,
+		JobComponent,
         JobEditorComponent,
         JobOverviewComponent,
         LoginComponent,
